@@ -35,14 +35,14 @@ function writeText(instance,myScreenText,myScreenTextColor,myScreenBColor,myScre
 	end
 	x = x1
 	charnum = 0
-	while (charnum < str.len(text)) do
+	while (charnum < string.len(text)) do
 		magicindex = getIndex(instance,x1+charnum,y1)
-		myScreenText[magicindex] = text[charnum + 1]
+		myScreenText[magicindex] = string.sub(text,charnum+1,charnum + 1)
 		myScreenTextColor[magicindex] = tColor
 		myScreenBColor[magicindex] = bColor
-		charnum += 1
+		charnum = charnum + 1
 	end
-	
+	return myScreenText,myScreenTextColor,myScreenBColor,myScreenButton
 end
 function drawRect(instance,myScreenText,myScreenTextColor,myScreenBColor,myScreenButton,x1,y1,x2,y2,ncolor,func)
 	-- Its ok for func = false;
@@ -59,6 +59,17 @@ end
 function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
 	if (instance == nil)then
 		print("SoftError: The instance that was provided in args 1 is NIL")
+		return nil
+	end
+	if(myScreenText == nil) then
+		print("SoftError: The text that was provided in args 2 is NIL")
+		return nil
+	end
+	if(myScreenTextColor == nil) then
+		return nil
+	end
+	if(myScreenBColor == nil) then
+		print("SoftError: The <TABLE>BackgroundColor that was provided in args 4 is NIL")
 		return nil
 	end
 	instance.setBackgroundColor(colors.black);
