@@ -66,6 +66,7 @@ function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
 		return nil
 	end
 	if(myScreenTextColor == nil) then
+		print("SoftError: The <TABLE>TextColor that was provided in args 3 is NIL")
 		return nil
 	end
 	if(myScreenBColor == nil) then
