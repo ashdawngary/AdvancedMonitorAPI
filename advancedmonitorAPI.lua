@@ -2,7 +2,7 @@ function getMonitorInstance(name)
 	return peripheral.wrap(name);
 end
 function createScreen(instance)
-	if (instance == nil) cc
+	if (instance == nil) then
 		print("SoftError: The instance that was provided in args 1 is NIL")
 		return nil
 	end
