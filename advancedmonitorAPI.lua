@@ -11,7 +11,7 @@ function createScreen(instance)
 		myScreenText[i] = " "
 		myScreenTextColor[i] = colors.white
 		myScreenBColor[i] = colors.black
-		myScreenButton[i] = 
+		myScreenButton[i] = false;
 	end
 	return myScreenText,myScreenTextColor,myScreenBColor
 	
