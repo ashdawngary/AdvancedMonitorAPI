@@ -14,6 +14,13 @@ function createScreen(instance)
 	return myScreenText,myScreenTextColor,myScreenBColor
 	
 end
+function getIndex(instance,x,y)
+	local length,width = instance.getSize();
+	return (y-1)*length + (x-1)
+end	
+function drawRect()
+
+end
 function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
 	instance.setBackgroundColor(colors.black);
 	instance.clear()
