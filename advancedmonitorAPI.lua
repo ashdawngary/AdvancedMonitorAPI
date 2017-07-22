@@ -2,6 +2,10 @@ function getMonitorInstance(name)
 	return peripheral.wrap(name);
 end
 function createScreen(instance)
+	if (instance == nil)
+		print("SoftError: The instance that was provided in args 1 is NIL")
+		return nil
+	end
 	myScreenText = {}
 	myScreenTextColor = {}
 	myScreenBColor = {}
@@ -17,22 +21,46 @@ function createScreen(instance)
 	
 end
 function getIndex(instance,x,y)
+	if (instance == nil)
+		print("SoftError: The instance that was provided in args 1 is NIL")
+		return nil
+	end
 	local length,width = instance.getSize();
 	return (y-1)*length + (x-1)
 end	
+function writeText(instance,myScreenText,myScreenTextColor,myScreenBColor,myScreenButton,x1,y1,text,tColor,bColor)
+	if (instance == nil)
+		print("SoftError: The instance that was provided in args 1 is NIL")
+		return nil
+	end
+	x = x1
+	charnum = 0
+	while (charnum < str.len(text)) do
+		magicindex = getIndex(instance,x1+charnum,y1)
+		myScreenText[magicindex] = text[charnum + 1]
+		myScreenTextColor[magicindex] = tColor
+		myScreenBColor[magicindex] = bColor
+		charnum += 1
+	end
+	
+end
 function drawRect(instance,myScreenText,myScreenTextColor,myScreenBColor,myScreenButton,x1,y1,x2,y2,ncolor,func)
 	-- Its ok for func = false;
 	for y = y1,y2 do
 		for x = x1,x2 do
 			myScreenText[getIndex(instance,x,y)] = " "
 			myScreenBColor[getIndex(instance,x,y)] = ncolor
-			myScreenButton[getIndex(instance,x,y)] = func
+			--myScreenButton[getIndex(instance,x,y)] = func
 		end
 	
 	end
 	return myScreenText,myScreenTextColor,myScreenBColor,myScreenButton
 end
 function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
+	if (instance == nil)
+		print("SoftError: The instance that was provided in args 1 is NIL")
+		return nil
+	end
 	instance.setBackgroundColor(colors.black);
 	instance.clear()
 	local length,width = instance.getSize();
@@ -46,8 +74,7 @@ function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
 			
 		end
 	end
-end
-			
+end		
 function writePixel(instance,myScreenText,myScreenTextColor,myScreenBColor,x,y,color,bcolor,text)
 
 	local length,width = instance.getSize();
