@@ -2,7 +2,7 @@ function getMonitorInstance(name)
 	return peripheral.wrap(name);
 end
 function createScreen(instance)
-	if (instance == nil)
+	if (instance == nil) cc
 		print("SoftError: The instance that was provided in args 1 is NIL")
 		return nil
 	end
@@ -21,7 +21,7 @@ function createScreen(instance)
 	
 end
 function getIndex(instance,x,y)
-	if (instance == nil)
+	if (instance == nil) then
 		print("SoftError: The instance that was provided in args 1 is NIL")
 		return nil
 	end
@@ -29,7 +29,7 @@ function getIndex(instance,x,y)
 	return (y-1)*length + (x-1)
 end	
 function writeText(instance,myScreenText,myScreenTextColor,myScreenBColor,myScreenButton,x1,y1,text,tColor,bColor)
-	if (instance == nil)
+	if (instance == nil)then
 		print("SoftError: The instance that was provided in args 1 is NIL")
 		return nil
 	end
@@ -57,7 +57,7 @@ function drawRect(instance,myScreenText,myScreenTextColor,myScreenBColor,myScree
 	return myScreenText,myScreenTextColor,myScreenBColor,myScreenButton
 end
 function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
-	if (instance == nil)
+	if (instance == nil)then
 		print("SoftError: The instance that was provided in args 1 is NIL")
 		return nil
 	end
