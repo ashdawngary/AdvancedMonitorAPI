@@ -34,7 +34,7 @@ function writeText(instance,myScreenText,myScreenTextColor,myScreenBColor,myScre
 		print("SoftError: The instance that was provided in args 1 is NIL")
 		return nil
 	end
-	if (tColor == nil || bColor == nil)
+	if ((tColor == nil ) or (bColor == nil)) then
 		print("SoftError: The <COLOR|INT>Colors that was provided in args 1 is NIL")
 		return nil
 	end
