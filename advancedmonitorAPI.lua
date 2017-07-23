@@ -29,8 +29,13 @@ function getIndex(instance,x,y)
 	return (y-1)*length + (x-1)
 end	
 function writeText(instance,myScreenText,myScreenTextColor,myScreenBColor,myScreenButton,x1,y1,text,tColor,bColor)
+	print("Writing Text: " .. text .. " to "..x1 .. ","..y1)
 	if (instance == nil)then
 		print("SoftError: The instance that was provided in args 1 is NIL")
+		return nil
+	end
+	if (tColor == nil || bColor == nil)
+		print("SoftError: The <COLOR|INT>Colors that was provided in args 1 is NIL")
 		return nil
 	end
 	x = x1
@@ -105,4 +110,11 @@ function writePixel(instance,myScreenText,myScreenTextColor,myScreenBColor,x,y,c
 	
 	return myScreenText,myScreenTextColor,myScreenBColor
 
+end
+function dumpData(instance,myScreenText,myScreenTextColor,myScreenBColor)
+	local length,width = instance.getSize();
+	print("Printing Requested Dump ----")
+	for i=0,length*width do
+		print(myScreenText[i].." "..myScreenTextColor[i].." "..myScreenBColor[i].." "..myScreenButton[i]);
+	end
 end
