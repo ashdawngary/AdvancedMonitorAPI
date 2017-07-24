@@ -1,3 +1,8 @@
+last_instance = nil -- These are for speed improvements :D
+last_mst = nil
+last_mstc = nil
+last_msbc = nil
+
 function getMonitorInstance(name)
 	return peripheral.wrap(name);
 end
@@ -81,9 +86,13 @@ function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
 		print("SoftError: The <TABLE>BackgroundColor that was provided in args 4 is NIL")
 		return nil
 	end
+	local length,width = instance.getSize();
+	if ((last_instance != nil) and (instance == last_instance)) then
+		updateScreenv2(instance,myScreenText,myScreenTextColor,myScreenBColor)
+		return nil
+	end
 	instance.setBackgroundColor(colors.black);
 	instance.clear()
-	local length,width = instance.getSize();
 	for y = 1,width do
 		for x = 1,length do
 			--(cell x,y) is at (y-1)*width + (x-1)
@@ -94,6 +103,10 @@ function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
 			
 		end
 	end
+	last_instance = instance
+	last_mst = myScreenText
+	last_mstc = myScreenTextColor
+	last_msbc = myScreenBColor
 end		
 function writePixel(instance,myScreenText,myScreenTextColor,myScreenBColor,myScreenButton,x,y,color,bcolor,text)
 	if (instance == nil) then
@@ -134,3 +147,24 @@ function dumpData(instance,myScreenText,myScreenTextColor,myScreenBColor)
 		print(myScreenText[i].." "..myScreenTextColor[i].." "..myScreenBColor[i].." "..myScreenButton[i]);
 	end
 end
+function updateScreenv2(instance,myScreenText,myScreenTextColor,myScreenBColor)
+	for y = 1,width do
+		for x = 1,length do
+			--(cell x,y) is at (y-1)*width + (x-1)
+			local bc = myScreenBColor[(y-1)*length + (x-1)]
+			local tc = myScreenTextColor[(y-1)*length + (x-1)]
+			local st = myScreenText[(y-1)*length + (x-1)]
+			if ((last_mst[(y-1)*length + (x-1)] != st) or (last_msbc[(y-1)*length + (x-1)] != bc) or (last_mstc[(y-1)*length + (x-1)] != tc)) then
+				instance.setCursorPos(x,y)
+				instance.setBackgroundColor(bc)
+				instance.setTextColor(tc)
+				instance.write(st)
+			end
+			
+		end
+	end
+	last_instance = instance
+	last_mst = myScreenText
+	last_mstc = myScreenTextColor
+	last_msbc = myScreenBColor
+end		
