@@ -27,7 +27,7 @@ function getIndex(instance,x,y)
 	end
 	local length,width = instance.getSize();
 	if ((x  > length ) or (x < 1)) then-- For Animation Purposes.
-		return -404
+		return -1
 	end
 	return (y-1)*length + (x-1)
 end	
@@ -95,7 +95,7 @@ function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
 		end
 	end
 end		
-function writePixel(instance,myScreenText,myScreenTextColor,myScreenBColor,x,y,color,bcolor,text)
+function writePixel(instance,myScreenText,myScreenTextColor,myScreenBColor,myScreenButton,x,y,color,bcolor,text)
 	if (instance == nil) then
 		print("WritePixelSoftError: Instance is nil.")
 		return -1
@@ -124,7 +124,7 @@ function writePixel(instance,myScreenText,myScreenTextColor,myScreenBColor,x,y,c
 		myScreenTextColor[getIndex(instance,x,y)]= color
 	end
 	
-	return myScreenText,myScreenTextColor,myScreenBColor
+	return myScreenText,myScreenTextColor,myScreenBColor,myScreenButton
 
 end
 function dumpData(instance,myScreenText,myScreenTextColor,myScreenBColor)
