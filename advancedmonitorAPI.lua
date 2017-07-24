@@ -26,6 +26,9 @@ function getIndex(instance,x,y)
 		return nil
 	end
 	local length,width = instance.getSize();
+	if ((x  < length ) or (x < 0)) then-- For Animation Purposes.
+		return -1
+	end
 	return (y-1)*length + (x-1)
 end	
 function writeText(instance,myScreenText,myScreenTextColor,myScreenBColor,myScreenButton,x1,y1,text,tColor,bColor)
