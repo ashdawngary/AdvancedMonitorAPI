@@ -26,8 +26,8 @@ function getIndex(instance,x,y)
 		return nil
 	end
 	local length,width = instance.getSize();
-	if ((x  < length ) or (x < 0)) then-- For Animation Purposes.
-		return -1
+	if ((x  > length ) or (x < 1)) then-- For Animation Purposes.
+		return -404
 	end
 	return (y-1)*length + (x-1)
 end	
