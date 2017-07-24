@@ -98,17 +98,18 @@ end
 function writePixel(instance,myScreenText,myScreenTextColor,myScreenBColor,x,y,color,bcolor,text)
 
 	local length,width = instance.getSize();
+	
 	if (text == false) then
-		myScreenText[(y-1)*length + (x-1)] = " "
+		myScreenText[getIndex(instance,x,y)] = " "
 	else
-		myScreenText[(y-1)*length+(x-1)] = text
+		myScreenText[getIndex(instance,x,y)] = text
 	end
 	
 	if (bcolor ~= false) then
-		myScreenBColor[(y-1)*length +(x-1)] = bcolor
+		myScreenBColor[getIndex(instance,x,y)] = bcolor
 	end
 	if(color ~= false) then
-		myScreenTextColor[(y-1)*length + (x-1)]= color
+		myScreenTextColor[getIndex(instance,x,y)]= color
 	end
 	
 	return myScreenText,myScreenTextColor,myScreenBColor
