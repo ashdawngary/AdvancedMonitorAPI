@@ -96,7 +96,19 @@ function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
 	end
 end		
 function writePixel(instance,myScreenText,myScreenTextColor,myScreenBColor,x,y,color,bcolor,text)
-
+	if (instance == nil) then
+		print("WritePixelSoftError: Instance is nil.")
+		return -1
+	elseif(myScreenText== nil) then
+		print("WritePixelSoftError: MST is nil.")
+		return -1
+	elseif(x== nil) then
+		print("WritePixelSoftError: X(int) is nil.")
+		return -1
+	elseif(y == nil) then
+		print("WritePixelSoftError: Y(int) is nil.")
+		return -1
+	end
 	local length,width = instance.getSize();
 	
 	if (text == false) then
