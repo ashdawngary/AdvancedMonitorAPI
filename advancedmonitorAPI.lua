@@ -93,7 +93,6 @@ function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
 	instance.setBackgroundColor(colors.black);
 	instance.clear()
 	local length,width = instance.getSize();
-	if (last_instance
 	for y = 1,width do
 		for x = 1,length do
 			--(cell x,y) is at (y-1)*width + (x-1)
