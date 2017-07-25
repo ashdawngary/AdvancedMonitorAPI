@@ -86,13 +86,14 @@ function updateScreen(instance,myScreenText,myScreenTextColor,myScreenBColor)
 		print("SoftError: The <TABLE>BackgroundColor that was provided in args 4 is NIL")
 		return nil
 	end
-	local length,width = instance.getSize();
-	if ((last_instance != nil) and (instance == last_instance)) then
+	if (last_instance  == instance) then
 		updateScreenv2(instance,myScreenText,myScreenTextColor,myScreenBColor)
 		return nil
 	end
 	instance.setBackgroundColor(colors.black);
 	instance.clear()
+	local length,width = instance.getSize();
+	if (last_instance
 	for y = 1,width do
 		for x = 1,length do
 			--(cell x,y) is at (y-1)*width + (x-1)
@@ -148,21 +149,33 @@ function dumpData(instance,myScreenText,myScreenTextColor,myScreenBColor)
 	end
 end
 function updateScreenv2(instance,myScreenText,myScreenTextColor,myScreenBColor)
+	
+	--instance.setBackgroundColor(colors.black);
+	--instance.clear()
+	local edits = 0
+	local length,width = instance.getSize();
 	for y = 1,width do
 		for x = 1,length do
+			local magicnumber = (y-1)*length + (x-1)
+			local nbc = myScreenBColor[magicnumber]
+			local ntc = myScreenTextColor[magicnumber]
+			local ntex = myScreenText[magicnumber]
+			local obc = last_msbc[magicnumber]
+			local otc = last_mstc[magicnumber]
+			local otex = last_mst[magicnumber]
+			if ((nbc ~= obc) or (ntc ~= otc) or (obc ~= nbc)) then
+				edits += 1
 			--(cell x,y) is at (y-1)*width + (x-1)
-			local bc = myScreenBColor[(y-1)*length + (x-1)]
-			local tc = myScreenTextColor[(y-1)*length + (x-1)]
-			local st = myScreenText[(y-1)*length + (x-1)]
-			if ((last_mst[(y-1)*length + (x-1)] != st) or (last_msbc[(y-1)*length + (x-1)] != bc) or (last_mstc[(y-1)*length + (x-1)] != tc)) then
 				instance.setCursorPos(x,y)
-				instance.setBackgroundColor(bc)
-				instance.setTextColor(tc)
-				instance.write(st)
+				instance.setBackgroundColor(ncb)
+				instance.setTextColor(ntc)
+				instance.write(ntex)
 			end
 			
 		end
 	end
+	local density = edits/(length * width)
+	print("screen update density: "..density)
 	last_instance = instance
 	last_mst = myScreenText
 	last_mstc = myScreenTextColor
