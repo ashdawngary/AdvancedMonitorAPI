@@ -163,10 +163,10 @@ function updateScreenv2(instance,myScreenText,myScreenTextColor,myScreenBColor)
 			local otc = last_mstc[magicnumber]
 			local otex = last_mst[magicnumber]
 			if ((nbc ~= obc) or (ntc ~= otc) or (obc ~= nbc)) then
-				edits += 1
+				edits = edits + 1
 			--(cell x,y) is at (y-1)*width + (x-1)
 				instance.setCursorPos(x,y)
-				instance.setBackgroundColor(ncb)
+				instance.setBackgroundColor(nbc)
 				instance.setTextColor(ntc)
 				instance.write(ntex)
 			end
