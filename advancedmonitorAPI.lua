@@ -162,7 +162,7 @@ function updateScreenv2(instance,myScreenText,myScreenTextColor,myScreenBColor)
 			local obc = last_msbc[magicnumber]
 			local otc = last_mstc[magicnumber]
 			local otex = last_mst[magicnumber]
-			if ((nbc ~= obc) or (ntc ~= otc) or (obc ~= nbc)) then
+			if ((ntex ~= otex) or (ntc ~= otc) or (obc ~= nbc)) then
 				edits = edits + 1
 			--(cell x,y) is at (y-1)*width + (x-1)
 				instance.setCursorPos(x,y)
